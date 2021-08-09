@@ -6,7 +6,3 @@ function fetchJson(url) {
       throw new Error(r.statusText);
   });
 }
-
-function listCountries(){
-  return fetchJson('https://api.covid19api.com/countries');
-}
