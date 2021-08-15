@@ -11,6 +11,9 @@
     if (response[0].status == "fulfilled") {
       loadCountries(await response[0].value.json());
     }
+    if (response[1].status == "fulfilled") {
+      loadSummary(await response[1].value.json());
+    }
   })();
 })();
 
@@ -30,4 +33,13 @@ function loadCountries(data) {
       data[index].Country
     );
   }
+}
+
+function loadSummary(data) {
+  let date = new Date(data.Global.Date);
+  document.getElementById("tconfirmed").textContent = data.Global.TotalConfirmed.toLocaleString("PT");
+  document.getElementById("tdeath").textContent = data.Global.TotalDeaths.toLocaleString("PT");
+  document.getElementById("trecovered").textContent = data.Global.TotalRecovered.toLocaleString("PT");
+  document.getElementById("actives").textContent = "Atualização";
+  document.getElementById("tactive").textContent = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
 }
